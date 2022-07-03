@@ -1,0 +1,10 @@
+.divCategories {
+  display: flex;
+  flex-direction: column;
+}
+
+.imgCategories {
+  width: 605px;
+  height: 205px;
+  margin: auto;
+}
