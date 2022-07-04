@@ -5,6 +5,8 @@ import styles from '../styles.module.css';
 import Carousel from 'react-grid-carousel';
 import Options from '../components/Options';
 import ButtonAddCar from '../components/ButtonAddCar';
+import ReactLoading from 'react-loading';
+import Imagenes from '../components/Imagenes';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -18,7 +20,7 @@ export default function Catalogo() {
 
   return (
     <div>
-      {data && data.products && (
+      {data && data.products ? (
         <div className={styles.divCategories}>
           <Options />
           {data.products.map((categories) => (
@@ -38,10 +40,7 @@ export default function Catalogo() {
                   >
                     {categories.images.map((produtc) => (
                       <Carousel.Item>
-                        <img
-                          src={`https://v3.tissini.app${produtc.url}`}
-                          className={styles.imgCarouselCatalogo}
-                        />
+                        <Imagenes info={produtc} />
                       </Carousel.Item>
                     ))}
                   </Carousel>
@@ -50,6 +49,15 @@ export default function Catalogo() {
               }
             </>
           ))}
+        </div>
+      ) : (
+        <div className={styles.divLoading}>
+          <ReactLoading
+            type={'spinningBubbles'}
+            color='#f06292'
+            width='10%'
+            height='10%'
+          />
         </div>
       )}
     </div>

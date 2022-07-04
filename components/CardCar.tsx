@@ -28,7 +28,7 @@ export default function CardCar({ info }) {
           Unidad:
           <p className={styles.textDescriptionCardCar}>{info.price}</p>
         </div>
-        <p className={styles.textPriceCardCar}>${info.total}</p>
+        <p className={styles.textPriceCardCar}>${info.total.toFixed(2)}</p>
       </div>
     </div>
   );
