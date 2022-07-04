@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Options from '../components/Options';
 import CardShopping from '../components/CardShopping';
-import styles from '../styles.module.css';
 import useSWR from 'swr';
 import Carousel from 'react-grid-carousel';
+import styles from '../styles.module.css';
+import { useRouter } from 'next/router';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Categories() {
-  const { data } = useSWR(
+  const router = useRouter();
+
+  const { data: secttions } = useSWR(
     'https://v3.tissini.app/api/v3/categories/sections',
     fetcher
   );
 
-  console.log(data);
+  const { data: categories } = useSWR(
+    'https://v3.tissini.app/api/v3/categories',
+    fetcher
+  );
+
   return (
     <div>
-      {data && (
+      <Options />
+      {secttions && (
         <div className={styles.divCategories}>
-          <Options />
-          {data.map((categories) => (
+          {secttions.map((categories) => (
             <>
               <img
                 src={`https://v3.tissini.app${categories.image}`}
@@ -45,6 +52,40 @@ export default function Categories() {
                 </Carousel>
               }
             </>
+          ))}
+        </div>
+      )}
+      {categories && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginTop: '20px',
+          }}
+        >
+          {categories.map((categorie) => (
+            <button
+              className={styles.buttonImgCategory}
+              onClick={() => {
+                router.push({
+                  pathname: './catalogo',
+                  query: `categorie=${categorie.id}`,
+                });
+              }}
+            >
+              <img
+                src={`https://v3.tissini.app${categorie.image}`.replace(
+                  '/img/categories/',
+                  '/img/categories/multivendor/'
+                )}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src =
+                    'https://www.emiweb.es/medias/images/imagen-raton.png';
+                }}
+                className={styles.imgCategories}
+              />
+            </button>
           ))}
         </div>
       )}
