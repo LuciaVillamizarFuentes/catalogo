@@ -26,9 +26,7 @@ export default function ModalAddProduct({ info, setOpen }) {
     for (let i = 0; i < lim; i++) {
       data.push(i + 1);
       setCant(data);
-      // cant.push(i + 1);
     }
-    console.log(cant);
   }, [quantity]);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -57,7 +55,6 @@ export default function ModalAddProduct({ info, setOpen }) {
     });
   };
 
-  console.log(cant.length && quantity && cant);
   return (
     <div className={styles.divModal}>
       <div className={styles.divHeaderModal}>

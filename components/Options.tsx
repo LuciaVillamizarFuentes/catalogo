@@ -12,8 +12,6 @@ export default function Options() {
 
   const [value, setValue] = useState(0);
 
-  console.log(value);
-
   return (
     <div>
       <Box

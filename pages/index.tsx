@@ -24,7 +24,6 @@ export default function Login() {
       router.push({
         pathname: './categories',
       });
-      console.log(data);
     } catch (error) {
       router.push({
         pathname: './categories',

@@ -2,7 +2,6 @@ import React from 'react';
 import styles from '../styles.module.css';
 
 export default function CardCar({ info }) {
-  console.log(info);
   return (
     <div className={styles.divCardCar}>
       <img

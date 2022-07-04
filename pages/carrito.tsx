@@ -13,7 +13,6 @@ export default function Carrito() {
     }
   }, []);
 
-  console.log(total);
   return (
     <div className={styles.divPageCardCard}>
       <Options />
